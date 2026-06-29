@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Entrepotes</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Entrepotes">
+        </div>
+    </header>
+
+    <main>
+        <section class="boas-vindas">
+            <h2>Bem-vindo à Entrepotes!</h2>
+            <p>Descubra geleias artesanais produzidas com frutas selecionadas, receitas tradicionais e muito carinho.</p>
+        </section>
+
+        <section id="geleias">
+            <h2>Conheça nossas geleias</h2>
+            <div class="cards-geleias">
+                <!-- cards vem aquiii -->
+            </div>
+        </section>
+
+        <section id="detalhes" style="display:none;">
+            <!-- detalhes here -->
+        </section>
+
+        <section id="categorias">
+            <h2>Navegue por Categoria</h2>
+
+            <div class="btnCategoria">
+                <button onclick="listarCategoria(3)">Tradicionais</button>
+                <button onclick="listarCategoria(2)">Tropicais</button>
+                <button onclick="listarCategoria(1)">Frutas Vermelhas</button>
+                <button onclick="listarCategoria(4)">Cítricas</button>
+                <button onclick="listarTodas()">Todas</button>
+            </div>
+        </section>
+
+        <button id="btnVerTabela" onclick="window.location.href='geleia.html'">Ver tabela completa</button>
+
+    </main>
+
+    <footer>
+        Desenvolvido por Juliana Coga de Jesus Cristo
+    </footer>
+
+    <script>
+
+        fetch("http://localhost:3001/geleias")
+            .then(response => response.json())
+            .then(data => {
+                const container = document.querySelector(".cards-geleias");
+                data.geleias.forEach(geleia => {
+                const card = document.createElement("a");
+                card.href = "#";
+                card.classList.add("card");
+
+                card.innerHTML = `
+                    <img class="imgCard" src="img/${geleia.imagem}" alt="${geleia.nome}">
+                    <h3>${geleia.nome}</h3>
+                    <p>${geleia.peso}g</p>
+                    <span>R$ ${Number(geleia.preco).toFixed(2)}</span>
+                `;
+
+                card.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    // busca a geleia pelo ID
+                    console.log(geleia.id);
+                });
+                container.appendChild(card);
+            });
+        })
+        .catch(error => console.error(error));
+
+        function listarCategoria(id){
+
+    fetch(`http://localhost:3001/geleias/categoria/${id}`)
+    .then(response => response.json())
+    .then(data => {
+        const container = document.querySelector(".cards-geleias");
+        container.innerHTML = "";
+        data.geleias.forEach(geleia => {
+            const card = document.createElement("a");
+            card.href = "#";
+            card.classList.add("card");
+
+            card.innerHTML = `
+                <img class="imgCard" src="img/${geleia.imagem}" alt="${geleia.nome}">
+                <h3>${geleia.nome}</h3>
+                <p>${geleia.categoria}</p>
+                <span>R$ ${Number(geleia.preco).toFixed(2)}</span>
+            `;
+            container.appendChild(card);
+        });
+    })
+    .catch(error => console.log(error));
+}
+
+function listarTodas() {
+    location.reload();
+}
+
+    </script>
+
+</body>
+</html>

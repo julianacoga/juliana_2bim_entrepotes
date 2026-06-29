@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Entrepotes - tabela de produtos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+    <h1>Consulta de geleias</h1>
+    
+    <div class="container">
+        <h3>Entrepotes</h3>
+        <div id="resultadoTodas"></div>
+    </div>
+    <div class="btn-voltar">
+    <button onclick="window.location.href='inicio.html'">Voltar para Início</button>
+    </div>
+
+    <script>
+        const enderecoServidor = 'localhost';
+        const porta = '3001';
+        window.onload = listarTodas;
+
+        async function listarTodas() {
+            try {
+                const response = await fetch(`http://${enderecoServidor}:${porta}/geleias`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.sucesso && data.geleias.length > 0) {
+                    let tabela = '<table>';
+                    tabela += '<tr><th>Imagem</th><th>Nome</th><th>Sabor</th><th>Ingredientes</th><th>Descrição</th><th>Harmonização</th><th>Peso</th><th>Preço</th></tr>';
+
+                    data.geleias.forEach(geleia => {
+                        tabela += `<tr>
+                            <td><img src="img/${geleia.imagem}" alt="${geleia.nome}"></td>
+                            <td>${geleia.nome}</td>
+                            <td>${geleia.sabor}</td>
+                            <td>${geleia.ingredientes}</td>
+                            <td>${geleia.descricao}</td>
+                            <td>${geleia.harmonizacao}</td>
+                            <td>${geleia.peso}g</td>
+                            <td>R$${geleia.preco}</td>
+                        </tr>`;
+                    });
+
+                    tabela += '</table>';
+                    document.getElementById('resultadoTodas').innerHTML = tabela;
+
+                } else if (data.sucesso && data.geleias.length === 0) {
+                    document.getElementById('resultadoTodas').innerHTML = '<span>Nenhum geleia cadastrado</span>';
+                } else {
+                    document.getElementById('resultadoTodas').innerHTML = `<span class="erro">${data.mensagem}</span>`;
+                }
+
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('resultadoTodas').innerHTML = '<span class="erro">Erro na comunicação com o servidor</span>';
+            }
+        }
+
+        
+
+    </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#FCFBF9;
+    font-family:'Poppins',sans-serif;
+    color:#433534;
+}
+
+/* HEADER */
+
+header{
+    height:100px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 80px;
+    background:white;
+    box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+
+.logo img{
+    height:200px;
+}
+
+header input{
+    width:280px;
+    padding:12px 18px;
+    border:none;
+    border-radius:30px;
+    background:#F3F3F3;
+    outline:none;
+    font-size:15px;
+}
+
+main{
+    width:90%;
+    max-width:1300px;
+    margin:50px auto;
+}
+
+.boas-vindas{
+    background:linear-gradient(135deg,#fff,#FFF7F8);
+    border-radius:25px;
+    padding:60px;
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.boas-vindas h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:48px;
+    color:#7A2234;
+    margin-bottom:15px;
+}
+
+.boas-vindas p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+}
+
+section h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:40px;
+    color:#7A2234;
+    margin-bottom:30px;
+}
+
+.cards-geleias{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.card{
+    text-decoration:none;
+    color:#433534;
+    background:white;
+    border-radius:22px;
+    padding:30px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.10);
+}
+
+.imgCard{
+    width:180px;
+    display:block;
+    margin:0 auto 20px;
+}
+
+.card h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:30px;
+    color:#7A2234;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#8B7A78;
+    margin-bottom:18px;
+}
+
+.card span{
+    font-weight:600;
+    font-size:18px;
+    color:#7A2234;
+}
+
+#categorias{
+    margin-top:80px;
+}
+
+.btnCategoria{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+}
+
+.btnCategoria button{
+    background:white;
+    border:2px solid #7A2234;
+    color:#7A2234;
+    padding:12px 26px;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.btnCategoria button:hover{
+    background:#7A2234;
+    color:white;
+}
+
+#btnVerTabela{
+    margin:70px auto;
+    display:block;
+    background:#7A2234;
+    color:white;
+    border:none;
+    padding:16px 35px;
+    border-radius:35px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#btnVerTabela:hover{
+    transform:scale(1.05);
+    background:#5E1B29;
+}
+
+#detalhes{
+    margin-top:60px;
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+footer{
+    margin-top:80px;
+    background:#7A2234;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+/* TABELA AGR */
+.wrapper{
+    width:95%;
+    margin:50px auto;
+}
+
+.wrapper h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:55px;
+    text-align:center;
+    color:#7A2234;
+    margin-bottom:10px;
+}
+
+.wrapper h3{
+    text-align:center;
+    color:#7A2234;
+    font-weight:400;
+    margin-bottom:30px;
+}
+
+.container{
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#7A2234;
+    color:white;
+    padding:16px;
+    font-weight:500;
+    font-size:15px;
+}
+
+td{
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #ececec;
+    font-size:14px;
+}
+
+tr:nth-child(even){
+    background:#FBF6F7;
+}
+
+tr:hover{
+    background:#F6E8EB;
+    transition:.2s;
+}
+
+td img{
+    width:65px;
+}
+
+.btn-voltar{
+    display:flex;
+    justify-content:center;
+    margin-top:35px;
+}
+
+.btn-voltar button{
+    background:#7A2234;
+    color:white;
+    border:none;
+    border-radius:30px;
+    padding:15px 35px;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-voltar button:hover{
+    background:#5E1A29;
+    transform:translateY(-2px);
+}
+
+.erro{
+    color:#C0392B;
+    font-weight:bold;
+}
