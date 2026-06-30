@@ -30,23 +30,17 @@
             </div>
         </section>
 
-        <section id="detalhes" style="display:none;">
-            <!-- detalhes here -->
-        </section>
-
         <section id="categorias">
             <h2>Navegue por Categoria</h2>
 
             <div class="btnCategoria">
-                <button onclick="listarCategoria(3)">Tradicionais</button>
-                <button onclick="listarCategoria(2)">Tropicais</button>
-                <button onclick="listarCategoria(1)">Frutas Vermelhas</button>
-                <button onclick="listarCategoria(4)">Cítricas</button>
+                <button onclick="listarTradicionais()">Tradicionais</button>
+                <button onclick="listarTropicais()">Tropicais</button>
+                <button onclick="listarVermelhas()">Frutas Vermelhas</button>
+                <button onclick="listarCitricas()">Cítricas</button>
                 <button onclick="listarTodas()">Todas</button>
             </div>
         </section>
-
-        <button id="btnVerTabela" onclick="window.location.href='geleia.html'">Ver tabela completa</button>
 
     </main>
 
@@ -58,57 +52,80 @@
 
         fetch("http://localhost:3001/geleias")
             .then(response => response.json())
-            .then(data => {
+            .then(data => mostrarGeleias(data.geleias))
+            .catch(error => console.log(error));
+
+        // Lista as geleias quando abre o site
+        fetch("http://localhost:3001/geleias")
+            .then(response => response.json())
+            .then(data => mostrarGeleias(data.geleias))
+            .catch(error => console.log(error));
+
+            function mostrarGeleias(geleias) {
                 const container = document.querySelector(".cards-geleias");
-                data.geleias.forEach(geleia => {
-                const card = document.createElement("a");
-                card.href = "#";
-                card.classList.add("card");
+                container.innerHTML = "";
 
-                card.innerHTML = `
-                    <img class="imgCard" src="img/${geleia.imagem}" alt="${geleia.nome}">
-                    <h3>${geleia.nome}</h3>
-                    <p>${geleia.peso}g</p>
-                    <span>R$ ${Number(geleia.preco).toFixed(2)}</span>
-                `;
+                geleias.forEach(geleia => {
+                    const card = document.createElement("a");
+                    card.href = "#";
+                    card.classList.add("card");
 
-                card.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    // busca a geleia pelo ID
-                    console.log(geleia.id);
+                    card.innerHTML = `
+                        <img class="imgCard" src="img/${geleia.imagem}" alt="${geleia.nome}">
+                        <h3>${geleia.nome}</h3>
+                        <p>${geleia.peso}g</p>
+                        <p>${geleia.categoria}</p>
+                        <span>R$ ${Number(geleia.preco).toFixed(2)}</span>
+                    `;
+
+                    card.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        console.log(geleia.id);
+                    });
+
+                    container.appendChild(card);
                 });
-                container.appendChild(card);
-            });
-        })
-        .catch(error => console.error(error));
+            }
 
-        function listarCategoria(id){
+            function listarTradicionais() {
+                fetch("http://localhost:3001/geleias/categoria/1")
+                    .then(response => response.json())
+                    .then(data => mostrarGeleias(data.geleias))
+                    .catch(error => console.log(error));
+            }
 
-    fetch(`http://localhost:3001/geleias/categoria/${id}`)
-    .then(response => response.json())
-    .then(data => {
-        const container = document.querySelector(".cards-geleias");
-        container.innerHTML = "";
-        data.geleias.forEach(geleia => {
-            const card = document.createElement("a");
-            card.href = "#";
-            card.classList.add("card");
+            function listarTropicais() {
+                fetch("http://localhost:3001/geleias/categoria/2")
+                    .then(response => response.json())
+                    .then(data => mostrarGeleias(data.geleias))
+                    .catch(error => console.log(error));
+            }
 
-            card.innerHTML = `
-                <img class="imgCard" src="img/${geleia.imagem}" alt="${geleia.nome}">
-                <h3>${geleia.nome}</h3>
-                <p>${geleia.categoria}</p>
-                <span>R$ ${Number(geleia.preco).toFixed(2)}</span>
-            `;
-            container.appendChild(card);
-        });
-    })
-    .catch(error => console.log(error));
-}
+            function listarVermelhas() {
+                fetch("http://localhost:3001/geleias/categoria/3")
+                    .then(response => response.json())
+                    .then(data => mostrarGeleias(data.geleias))
+                    .catch(error => console.log(error));
+            }
 
-function listarTodas() {
-    location.reload();
-}
+            function listarCitricas() {
+                fetch("http://localhost:3001/geleias/categoria/4")
+                    .then(response => response.json())
+                    .then(data => mostrarGeleias(data.geleias))
+                    .catch(error => console.log(error));
+            }
+
+            function listarTodas() {
+                fetch("http://localhost:3001/geleias")
+                    .then(response => response.json())
+                    .then(data => mostrarGeleias(data.geleias))
+                    .catch(error => console.log(error));
+            }
+                
+
+            function listarTodas() {
+                location.reload();
+            }
 
     </script>
 

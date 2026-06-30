@@ -29,7 +29,23 @@ app.use((req, res, next) => {
 // Rota para listar todas as pessoas
 app.get('/geleias', async (req, res) => {
     try {
-        const query = 'SELECT id, nome, sabor, ingredientes, descricao, harmonizacao, peso, preco, validade, imagem, categoria_id FROM GELEIA ORDER BY id';
+        const query = `
+            SELECT 
+                g.id, 
+                g.nome, 
+                g.sabor, 
+                g.ingredientes, 
+                g.descricao, 
+                g.harmonizacao, 
+                g.peso, 
+                g.preco, 
+                g.validade, 
+                g.imagem, 
+                c.nome AS categoria
+            FROM GELEIA g
+            JOIN CATEGORIA c ON g.categoria_id = c.id
+            ORDER BY g.id
+        `;
         const result = await pool.query(query);
         
         res.json({ 
@@ -65,9 +81,21 @@ const ip = obterIP();
 app.get('/api/geleias/:id', async (req, res) => {
     try {
         const query = `
-            SELECT id, nome, sabor, ingredientes, descricao, harmonizacao, peso, preco, validade, imagem, categoria_id
-            FROM GELEIA
-            WHERE id = $1
+            SELECT 
+                g.id, 
+                g.nome, 
+                g.sabor, 
+                g.ingredientes, 
+                g.descricao, 
+                g.harmonizacao, 
+                g.peso, 
+                g.preco, 
+                g.validade, 
+                g.imagem, 
+                c.nome AS categoria
+            FROM GELEIA g
+            JOIN CATEGORIA c ON g.categoria_id = c.id
+            WHERE g.id = $1
         `;
 
         const result = await pool.query(query, [req.params.id]);
@@ -106,6 +134,7 @@ app.get("/geleias/categoria/:id", async (req, res) => {
                 g.id,
                 g.nome,
                 g.sabor,
+                g.peso,
                 g.preco,
                 g.imagem,
                 c.nome AS categoria
