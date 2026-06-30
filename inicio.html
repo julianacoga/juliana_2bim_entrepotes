@@ -49,17 +49,17 @@
     </footer>
 
     <script>
-
-        fetch("http://localhost:3001/geleias")
-            .then(response => response.json())
-            .then(data => mostrarGeleias(data.geleias))
-            .catch(error => console.log(error));
-
         // Lista as geleias quando abre o site
-        fetch("http://localhost:3001/geleias")
-            .then(response => response.json())
-            .then(data => mostrarGeleias(data.geleias))
-            .catch(error => console.log(error));
+        async function carregarGeleias() {
+            try {
+                const response = await fetch("http://localhost:3001/geleias");
+                const data = await response.json();
+                mostrarGeleias(data.geleias);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        carregarGeleias();
 
             function mostrarGeleias(geleias) {
                 const container = document.querySelector(".cards-geleias");

@@ -117,12 +117,6 @@ app.get('/api/geleias/:id', async (req, res) => {
     }
 });
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Servidor rodando em http://${ip}:${port}`);
-    console.log(`Rotas disponíveis:`);
-    console.log(`GET http://${ip}:${port}/geleias - Listar todas as geleias`);
-});
-
 app.get("/geleias/categoria/:id", async (req, res) => {
 
     try {
@@ -160,4 +154,10 @@ app.get("/geleias/categoria/:id", async (req, res) => {
         });
     }
 
+});
+
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Servidor rodando em http://${ip}:${port}`);
+    console.log(`Rotas disponíveis:`);
+    console.log(`GET http://${ip}:${port}/geleias - Listar todas as geleias`);
 });
