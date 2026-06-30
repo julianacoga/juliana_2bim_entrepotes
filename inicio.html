@@ -87,44 +87,54 @@
                 });
             }
 
-            function listarTradicionais() {
-                fetch("http://localhost:3001/geleias/categoria/1")
-                    .then(response => response.json())
-                    .then(data => mostrarGeleias(data.geleias))
-                    .catch(error => console.log(error));
+            async function listarTradicionais() {
+                try {
+                    const response = await fetch("http://localhost:3001/geleias/categoria/3");
+                    const data = await response.json();
+                    mostrarGeleias(data.geleias);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
-            function listarTropicais() {
-                fetch("http://localhost:3001/geleias/categoria/2")
-                    .then(response => response.json())
-                    .then(data => mostrarGeleias(data.geleias))
-                    .catch(error => console.log(error));
+            async function listarTropicais() {
+                try {
+                    const response = await fetch("http://localhost:3001/geleias/categoria/2");
+                    const data = await response.json();
+                    mostrarGeleias(data.geleias);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
-            function listarVermelhas() {
-                fetch("http://localhost:3001/geleias/categoria/3")
-                    .then(response => response.json())
-                    .then(data => mostrarGeleias(data.geleias))
-                    .catch(error => console.log(error));
+            async function listarVermelhas() {
+                try {
+                    const response = await fetch("http://localhost:3001/geleias/categoria/1");
+                    const data = await response.json();
+                    mostrarGeleias(data.geleias);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
-            function listarCitricas() {
-                fetch("http://localhost:3001/geleias/categoria/4")
-                    .then(response => response.json())
-                    .then(data => mostrarGeleias(data.geleias))
-                    .catch(error => console.log(error));
+            async function listarCitricas() {
+                try {
+                    const response = await fetch("http://localhost:3001/geleias/categoria/4");
+                    const data = await response.json();
+                    mostrarGeleias(data.geleias);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
-            function listarTodas() {
-                fetch("http://localhost:3001/geleias")
-                    .then(response => response.json())
-                    .then(data => mostrarGeleias(data.geleias))
-                    .catch(error => console.log(error));
-            }
-                
-
-            function listarTodas() {
-                location.reload();
+            async function listarTodas() {
+                try {
+                    const response = await fetch("http://localhost:3001/geleias");
+                    const data = await response.json();
+                    mostrarGeleias(data.geleias);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
     </script>
